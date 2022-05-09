@@ -1,0 +1,25 @@
+version: '3.8'
+services: # 이 항목 밑에 실행하려는 컨테이너 들을 정의
+  prometheus: # 서비스 명
+    image: prom/prometheus:latest # 사용할 이미지
+    container_name: prometheus # 컨테이너 이름 설정
+    user: "root"
+    ports:
+      - 9090:9090 # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
+    volumes:
+      - '$HOME/prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml'
+    restart: always
+    network_mode: host
+  grafana:
+    image: grafana/grafana:latest # 사용할 이미지
+    container_name: grafana # 컨테이너 이름 설정
+    user: "root"
+    ports:
+      - 3000:3000 # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
+    volumes:
+      - '$HOME/grafana/config/grafana.ini:/etc/grafana/grafana.ini'
+    restart: always
+    network_mode: host
+    depends_on:
+      - prometheus
+
