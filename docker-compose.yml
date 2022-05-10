@@ -12,6 +12,7 @@ services: # 이 항목 밑에 실행하려는 컨테이너 들을 정의
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     restart: always
+    network_mode: host
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -24,3 +25,12 @@ services: # 이 항목 밑에 실행하려는 컨테이너 들을 정의
     restart: always
     depends_on:
       - prometheus
+    network_mode: host
+  java:
+    image: joypark9/o11y-sample-app:latest
+    container_name: sample-app
+    user: "root"
+    ports:
+      - 8888:8888
+    restart: always
+    network_mode: host
