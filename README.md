@@ -39,7 +39,7 @@ java:
 - job_name: 'sample_app'
     metrics_path: '/actuator/prometheus'
     static_configs:
-    - targets: ['localhost:8888’]
+    - targets: ['localhost:8888']
 ```
 
 * 실행 
